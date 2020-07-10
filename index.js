@@ -4,14 +4,14 @@ const mongoose = require('mongoose')
 const app = require('./app')
 
 
-
-mongoose.connect('mongodb://localhost:27017/accounts', { useNewUrlParser: true }, (err, res) => {
+const mongo = process.env.DB || 'mongodb://localhost:27017/accounts'
+mongoose.connect(mongo, { useNewUrlParser: true }, (err, res) => {
     if (err) {
         return console.log(`Error al conectar a mongo ): ${err}`);
     }
     console.log('Conexión a mongo establecida :)');
-    
-    app.listen(3000, () => {
+const port = process.env.PORT || 3000
+    app.listen(port, () => {
         console.log('API corriendo')
         
     })
